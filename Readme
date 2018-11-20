@@ -1,0 +1,18 @@
+To set up:
+
+go to the folder 
+
+cd experiments/config/
+
+when you are there create two files: 
+
+input_data_location.txt 
+output_data_location.txt
+
+
+to run. 
+
+You need to create a config file in the following root path of the project
+called config.txt
+
+type python run.py config.txt

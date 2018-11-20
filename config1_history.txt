@@ -1,0 +1,5 @@
+input_data_location:/home/liana/cache_data/
+experiment_name:madmax.1-7.blkparse,online.1-7.blkparse,topgun.1-7.blkparse,webmail.1-7.blkparse,webresearch.1-7.blkparse,webusers.1-7.blkparse
+cache_size:0.001
+history_size_multiple:0.5,1,1.5,2,2.5,3,3.5,4
+algorithm:LeCaR

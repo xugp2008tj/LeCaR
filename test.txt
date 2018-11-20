@@ -1,0 +1,10 @@
+input_data_location:/home/liana/cache_data/
+experiment_name:madmax-110108-112108.3.blkparse,online.cs.fiu.edu-110108-113008.3.blkparse,webmail.cs.fiu.edu-110108-113008.3.blkparse,webresearch-030409-033109.3.blkparse,webusers-030409-033109.3.blkparse
+cache_size:0.001
+initial_weight:0
+algorithm:LeCaR_new
+
+input_data_location:/home/liana/cache_data/
+experiment_name:topgun-110108-112108.3.blkparse,casa-110108-112108.3.blkparse,ikki-110108-112108.3.blkparse,madmax-110108-112108.3.blkparse,online.cs.fiu.edu-110108-113008.3.blkparse,webmail.cs.fiu.edu-110108-113008.3.blkparse,webresearch-030409-033109.3.blkparse,webusers-030409-033109.3.blkparse
+cache_size:0.001
+algorithm:LFU

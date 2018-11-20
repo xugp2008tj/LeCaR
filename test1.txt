@@ -1,0 +1,6 @@
+input_data_location:/home/liana/cache_data/
+experiment_name:madmax-110108-112108.3.blkparse
+cache_size:0.001
+algorithm:LeCaR_new,LFU
+visualize:1
+

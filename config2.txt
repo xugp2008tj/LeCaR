@@ -1,0 +1,8 @@
+input_data_location:/home/liana/cache_data/
+experiment_name:topgun-110108-112108.3.blkparse,casa-110108-112108.3.blkparse,ikki-110108-112108.3.blkparse,madmax-110108-112108.3.blkparse,online.cs.fiu.edu-110108-113008.3.blkparse,webmail.cs.fiu.edu-110108-113008.3.blkparse,webresearch-030409-033109.3.blkparse,webusers-030409-033109.3.blkparse,homes-110108-112108.3.blkparse
+discount_rate:0.995
+learning_rate:0.1,0.2,0.3,0.4,0.45,0.5,0.6,0.7,0.8,0.9,1
+history_size_multiple:1
+visualize:0
+cache_size:0.001
+algorithm:lecar
