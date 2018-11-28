@@ -33,9 +33,9 @@ class LeCaR9(page_replacement_algorithm):
          
         self.Visualization = 'visualize' in param and bool(param['visualize'])
         self.lamb = 0.05
-        
-        self.initial_learning_rate = 0.1
-        self.learning_rate = 0.1
+        self.reset_point = float(param['learning_rate']) if 'learning_rate' in param else 0
+        # self.initial_learning_rate = 0.1
+        # self.learning_rate = 0.1
 
 
         self.CacheRecency = CacheLinkedList(self.N)
@@ -58,7 +58,7 @@ class LeCaR9(page_replacement_algorithm):
         self.PreviousChangeInHR = 0.0
         self.NewChangeInHR =0.0
         self.PreviousLR= 0
-        self.NewLR = 0
+        self.NewLR = self.learning_rate
         
         self.learning_rates = []
         self.SampleHR =[]
@@ -67,7 +67,7 @@ class LeCaR9(page_replacement_algorithm):
         self.SampleCacheHit = 0
         self.recent_learning_rates=[]
         self.dict = OrderedDict()
-        # self.reset_point = 0.1
+       
 
 
        
@@ -242,13 +242,13 @@ class LeCaR9(page_replacement_algorithm):
                 delta_2 = self.PreviousChangeInHR
                 delta = delta_1 * delta_2
                 
-                if self.NewHR !=0 and self.learning_rate !=0:
-                #     self.lr_hr_dict[round(self.learning_rate,3)] = self.NewHR    
-                    lr = round(self.learning_rate,3)
-                    self.dict[lr] =  self.NewHR
-                if len(self.dict)> 20*self.N:
-                    self.dict.popitem(last= False)
-                if self.learning_rate * (self.SampleCacheHit/ float(self.SAMPLE_SIZE)) <10**(-5):
+                # if self.NewHR !=0 and self.learning_rate !=0:
+                # #     self.lr_hr_dict[round(self.learning_rate,3)] = self.NewHR    
+                #     lr = round(self.learning_rate,3)
+                #     self.dict[lr] =  self.NewHR
+                # if len(self.dict)> 20*self.N:
+                #     self.dict.popitem(last= False)
+                # if self.learning_rate * (self.SampleCacheHit/ float(self.SAMPLE_SIZE)) <10**(-5):
                 #     if len(self.dict) !=0 :
                 #         self.reset_point = max(self.dict, key= self.dict.get)
                 #         # for (key, value) in self.dict.items() :
@@ -256,7 +256,7 @@ class LeCaR9(page_replacement_algorithm):
                 #         # print (self.reset_point)
                 #         self.learning_rate = self.reset_point 
                 #     else: 
-                        self.learning_rate = self.initial_learning_rate
+                        # self.learning_rate = 0.1
 
 
                 # if self.learning_rate * (self.SampleCacheHit/ self.SampleHitQ._qsize()) <10**(-5):
@@ -270,42 +270,54 @@ class LeCaR9(page_replacement_algorithm):
                     #     # self.SampleHitQ.queue.clear()
                     #     # self.SampleHitQ = queue.Queue(maxsize= self.SAMPLE_SIZE)
                     # else: self.learning_rate = 0.45
+
+                if (self.NewLR-self.PreviousLR) !=0:
+                        delta_1 = self.NewChangeInHR / (self.NewLR- self.PreviousLR)
+                else:
+                    delta_1 = 0
+                        
                    
-                elif delta> 10**(-3) :
-                  if delta_1< -10**(-3):
-                        self.learning_rate = min(self.learning_rate + abs(delta), 1  )
-                #   elif delta_1> 10**(-3):
-                #         self.learning_rate = max(self.learning_rate- abs(delta), 0.001  )
+                # if self.learning_rate * (self.SampleCacheHit/ float(self.SAMPLE_SIZE)) <10**(-5):
+                    
+                #         self.learning_rate = self.reset_point
+                   
+                # elif delta> 10**(-3) and delta_1< -10**(-3):
+                #         self.learning_rate = min(self.learning_rate + abs(delta), 1  )
 
                      
                     
-                elif delta< -10**(-3) :
-                    if  delta_1 < -10**(-3):
-                        self.learning_rate = max( (self.learning_rate - abs(delta_1)) , 0 )
-                        # self.W = self.PreviousW
-                    # elif  delta_1 > 10**(-3):
-                    #     self.learning_rate = max( (self.learning_rate - abs(delta) ), 0.001 )
+                # elif delta< -10**(-3) and  delta_1 < -10**(-3):
+                #         self.learning_rate = max( (self.learning_rate  )/2, 0 )
+                # if delta> 0 and delta_1< 0:
+               
+                #     self.learning_rate = min( self.learning_rate +abs(delta_1) ,1)
+                # elif delta< 0 and delta_1< 0:
+               
+                #     self.learning_rate = max( self.learning_rate - abs(delta_1), 0.001)
+
+                # self.learning_rate =max( min( self.learning_rate +(delta_1) ,1), 0.001)
+
+                if delta_1>0:
+                    self.learning_rate = min( self.learning_rate +(self.learning_rate/2) ,1)
+                elif delta_1<0:
+                    self.learning_rate =max(  self.learning_rate -(self.learning_rate/2), 0.001)
+                elif delta_1 ==0:
+                    if self.NewChangeInHR <= 0:
+                        if self.learning_rate == 1:
+                            self.learning_rate =max(  self.learning_rate -(self.learning_rate/2), 0.001)
+                        elif self.learning_rate <= 0.001:
+                            self.learning_rate = min( self.learning_rate *2 ,1)
+                            # print(self.learning_rate)
+
+
                        
                   
                
                 self.PreviousLR = self.NewLR
-
                 self.PreviousW = self.W
-
                 self.NewLR = self.learning_rate
-
-               
-                
-
-                
                 self.PreviousW = self.W
                 self.PreviousHR = self.NewHR
-                
-		
-		
-                	
-                
-                # self.PreviousHR = self.NewHR
                 
                 self.PreviousChangeInHR = self.NewChangeInHR
                 
@@ -329,7 +341,7 @@ class LeCaR9(page_replacement_algorithm):
         ## Clean up
         ## In case PQ get too large
         ##########################
-        if len(self.PQ) > 2*self.N:
+        if len(self.PQ) > self.N:
             newpq = []
             for pg in self.CacheRecency:
                 newpq.append((self.freq[pg],pg))
@@ -351,11 +363,11 @@ class LeCaR9(page_replacement_algorithm):
         #####################################################
         ## Adapt learning rate Here
         ###################################################### 
-        seq_len = self.N
+        seq_len = 10*self.N 
         self.updateLearningRates(seq_len)
        
-        if self.SampleHitQ.full():
-            self.SampleCacheHit -= self.SampleHitQ.get()
+        # if self.SampleHitQ.full():
+        #     self.SampleCacheHit -= self.SampleHitQ.get()
         
          ##########################
         ## Process page request
@@ -365,8 +377,8 @@ class LeCaR9(page_replacement_algorithm):
             page_fault = False
             self.CacheHit +=1
             
-            self.SampleCacheHit += 1
-            self.SampleHitQ.put(1)
+            # self.SampleCacheHit += 1
+            # self.SampleHitQ.put(1)
                        
             self.pageHitUpdate(page)
         
@@ -378,7 +390,7 @@ class LeCaR9(page_replacement_algorithm):
             #####################################################
             pageevict = None
             
-            self.SampleHitQ.put(0)
+            # self.SampleHitQ.put(0)
              
 
             reward = np.array([0,0], dtype=np.float32)
@@ -386,7 +398,7 @@ class LeCaR9(page_replacement_algorithm):
                 pageevict = page
                 self.Hist1.delete(page)
                 
-                reward[0] = -1 
+                # reward[0] = -1 
                 reward[0] = -self.discount_rate **(  (self.time-self.eTime[page])  )  ## punish
 
                 # reward[0] = -1 ## punish
@@ -394,8 +406,8 @@ class LeCaR9(page_replacement_algorithm):
             elif page in self.Hist2:
                 pageevict = page
                 self.Hist2.delete(page)
-                reward[1] = -1 
-                reward[1] = -self.discount_rate ** (  (self.time-self.eTime[page])  ) 
+                # reward[1] = -1 
+                reward[1] = -self.discount_rate **(  (self.time-self.eTime[page])  ) 
 
                 # reward[1] = -1 ## punish
             

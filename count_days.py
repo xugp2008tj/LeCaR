@@ -1,6 +1,9 @@
 import sys
 import time
 
+#input_file = sys.argv[1]
+#f = open(input_file)
+
 def nu_days(filename):
   filename = str(sys.argv[1])
   with open(filename) as f:
