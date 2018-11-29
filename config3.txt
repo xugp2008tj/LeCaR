@@ -1,6 +1,6 @@
-input_data_location:/home/liana/cache_data/
-experiment_name:CAMWEBDEV-lvm2-day1.csv,CAMRESWEBA03-lvm1-day1.csv,CAMRESSTGA01-lvm1-day1.csv 
-cache_size:0.0001,0.0005,0.001,0.005,0.01
+input_data_location:/lclhome/gviet001/data/
+experiment_name:CAMWEBDEV-lvm2-day1.csv,CAMWEBDEV-lvm1-day1.csv,CAMWEBDEV-lvm0-day1.csv,CAM-USP-01-lvm1-day1.csv,CAM-USP-01-lvm0-day1.csv,CAMRESWMSA03-lvm1-day1.csv,CAMRESWMSA03-lvm0-day1.csv,CAMRESWEBA03-lvm3-day1.csv,CAMRESWEBA03-lvm2-day1.csv,CAMRESWEBA03-lvm1-day1.csv,CAMRESWEBA03-lvm0-day1.csv,CAMRESTSA01-lvm0-day1.csv,CAMRESSTGA01-lvm1-day1.csv,CAMRESSTGA01-lvm0-day1.csv,CAMRESSDPA03-lvm2-day1.csv,CAMRESSDPA03-lvm1-day1.csv,CAMRESSDPA03-lvm0-day1.csv,CAMRESSDPA01-lvm2-day1.csv,CAMRESSDPA01-lvm1-day1.csv,CAMRESSDPA01-lvm0-day1.csv,CAMRESISAA02-lvm0-day1.csv,CAMRESIRA01-lvm2-day1.csv,CAMRESIRA01-lvm1-day1.csv,CAMRESIRA01-lvm0-day1.csv,CAMRESHSA01-lvm1-day1.csv,CAMRESHSA01-lvm0-day1.csv,CAM-02-SRV-lvm4-day1.csv,CAM-02-SRV-lvm3-day1.csv,CAM-02-SRV-lvm2-day1.csv,CAM-02-SRV-lvm1-day1.csv,CAM-02-SRV-lvm0-day1.csv,CAM-01-SRV-lvm2.csv-day1.csv,CAM-01-SRV-lvm1.csv-day1.csv,CAM-01-SRV-lvm0.csv-day1.csv,CAMWEBDEV-lvm2-day1.csv,CAMRESWEBA03-lvm1-day1.csv,CAMRESSTGA01-lvm1-day1.csv 
+cache_size:0.0005,0.001,0.005
 algorithm:lecar4,lecar9
 learning_rate:0.45
 discount_rate:0.05,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,0.95,0.955,0.96,0.97,0.98,0.995,0.9995,0.99
