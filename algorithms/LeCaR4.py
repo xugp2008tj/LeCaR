@@ -29,7 +29,7 @@ class LeCaR4(page_replacement_algorithm):
         self.initial_weight = float(param['initial_weight']) if 'initial_weight' in param else 0.5
         self.discount_rate = float(param['discount_rate']) if 'discount_rate' in param else 1
         self.Visualization = 'visualize' in param and bool(param['visualize'])
-        self.discount_rate = 0.005**(1/self.N)
+        #self.discount_rate = 0.005**(1/self.N)
         np.random.seed(123)
 
         self.CacheRecency = CacheLinkedList(self.N)
