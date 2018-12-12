@@ -1,0 +1,8 @@
+input_data_location:/home/liana/cache_data/
+experiment_name:CAMRESWEBA03-lvm2-day1.csv,CAMRESWEBA03-lvm1-day1.csv,CAMRESWEBA03-lvm0-day1.csv,CAMRESSDPA03-lvm0-day1.csv,CAMRESSDPA03-lvm2-day1.csv,CAMRESSDPA03-lvm1-day1.csv,CAMRESSDPA01-lvm2-day1.csv 
+cache_size:0.001
+algorithm:lecar4,lecar9
+learning_rate:0.45
+discount_rate:0.9,0.95,0.955,0.96,0.965,0.969,0.97,0.975,0.979,0.98,0.985,0.989,0.995,0.99,0.9995
+history_size_multiple:1
+visualize:0
